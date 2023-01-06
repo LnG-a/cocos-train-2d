@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, tween, v3 } from "cc";
+import { AudioController } from "./AudioController";
 const { ccclass, property } = _decorator;
 
 @ccclass("game")
@@ -13,17 +14,16 @@ export class game extends Component {
   private multipleChoicesScreen = null;
 
   start() {
-    this.homeScreen.active = true;
-    this.gateScreen.active = true;
-    this.multipleChoicesScreen.active = true;
+    this.gateScreen.active = false;
+    this.multipleChoicesScreen.active = false;
   }
 
   navigateToGate() {
-    this.homeScreen.active = false;
+    this.gateScreen.active = true;
   }
 
   navigateToPlayScreen() {
-    this.gateScreen.active = false;
+    this.multipleChoicesScreen.active = true;
   }
 
   update(deltaTime: number) {}
