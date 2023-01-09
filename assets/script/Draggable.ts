@@ -42,6 +42,8 @@ export class Draggable extends Component {
       .checkAnswer(this.node);
 
     //this.node.parent.setPosition(200, 200, 0);
-    this.node.setPosition(this.defaultPos);
+    if (!checkAnswer) {
+      this.node.setPosition(this.defaultPos);
+    }
   }
 }

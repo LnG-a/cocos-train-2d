@@ -1,9 +1,17 @@
-import { _decorator, Component, Node, tween, v3 } from "cc";
+import {
+  _decorator,
+  Component,
+  Node,
+  tween,
+  v3,
+  AudioSource,
+  UIOpacity,
+} from "cc";
 import { AudioController } from "./AudioController";
 const { ccclass, property } = _decorator;
 
-@ccclass("game")
-export class game extends Component {
+@ccclass("Game")
+export class Game extends Component {
   @property({ type: Node })
   private homeScreen = null;
 
@@ -24,7 +32,25 @@ export class game extends Component {
 
   navigateToPlayScreen() {
     this.multipleChoicesScreen.active = true;
-  }
 
-  update(deltaTime: number) {}
+    tween(this.multipleChoicesScreen.getComponent(UIOpacity))
+      .to(2, {
+        opacity: 255,
+      })
+      .start();
+
+    tween(this.gateScreen.getComponent(UIOpacity))
+      .to(2, {
+        opacity: 0,
+      })
+      .start();
+
+    tween(this.gateScreen)
+      .to(2, { scale: v3(2, 2, 1) })
+      .start();
+
+    this.scheduleOnce(function () {
+      this.gateScreen.active = false;
+    }, 2);
+  }
 }
